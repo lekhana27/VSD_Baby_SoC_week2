@@ -148,3 +148,66 @@ gtkwave pre_synth_sim.vcd
 - DAC converts to analog output: `OUT ≈ 0.29V`
 Conclusion:
 Digital data flows correctly from CPU → DAC → Analog output, forming a smooth waveform. This confirms correct module integration and data transfer.
+---
+## 🧪 Post-Synthesis Simulation
+
+Post-synthesis simulation checks the **functionality and timing** of the synthesized design using the **gate-level netlist**. Unlike pre-synthesis simulation, which verifies RTL logic only, post-synthesis ensures correct behavior under real-world conditions and reveals issues like glitches, race conditions, or unintended latches.
+
+### 🔹 Why Pre- vs Post-Synthesis?
+
+- **Pre-Synthesis Simulation:**  
+  - Verifies logical functionality of RTL  
+  - Detects design errors early  
+  - Fast, abstract simulation  
+
+- **Post-Synthesis Simulation:**  
+  - Checks functionality and timing at gate level  
+  - Accounts for gate delays  
+  - Identifies synthesis-induced issues  
+
+### 🔹 Comparison
+
+| Aspect          | Pre-Synthesis        | Post-Synthesis          |
+|-----------------|-------------------|------------------------|
+| Focus           | RTL logic          | Functionality + Timing |
+| Design Level    | RTL / behavioral   | Gate-level netlist     |
+| Purpose         | Catch logical errors | Catch timing/synthesis issues |
+| Speed           | Faster             | Slower                 |
+| Accuracy        | Abstract           | Realistic (gate delays)|
+---
+## 🧪 Simulation
+![post_synthesis ](./images/post_synth.png)
+
+## 📈 Signal Behavior Analysis
+
+### Clock Signal (CLK)
+- Regular toggling between 0 and 1  
+- Consistent frequency maintained throughout  
+- Indicates PLL is working properly, generating a stable clock  
+
+### Digital Data (RV_TO_DAC / D[9:0])
+- Changing values over time: `0BE → 387 → 0AB → 0E7`  
+- Non-linear pattern indicates CPU is executing different instructions  
+- Values represent varying output from RISC-V core  
+
+### Analog Output (OUT)
+- Voltage changes correspond to digital input changes  
+- `0.18V → 0.88V → varying` over time  
+- Shows DAC conversion is dynamic and working correctly  
+
+### Reset Signal
+- Stable at `0` throughout observations  
+- Confirms continuous operation without interruptions  
+
+### 🔄 Key Pattern Observations
+
+- **Time Progression:** Signals captured at different time points (18.7μs, 22.9μs, etc.) show continuous system operation  
+- **Signal Relationships:** CLK edges correlate with data stability periods; OUT voltage directly follows D[9:0] changes  
+- **System Health:** No glitches or anomalies; clean transitions and stable voltage levels maintained  
+
+**Conclusion:**  
+The waveforms show a properly functioning digital system with coordinated signal changes and accurate analog conversion.
+✅ The simulation results are consistent, indicating that the design’s functionality is maintained after synthesis.  
+
+This confirms that the synthesized netlist behaves equivalently to the original RTL design.
+
