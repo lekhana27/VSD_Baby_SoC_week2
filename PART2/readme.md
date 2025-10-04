@@ -4,7 +4,7 @@ To build a solid understanding of SoC fundamentals and practice functional model
 🛠️ Tools Used
 1. Yosys – RTL Synthesis Tool
 Purpose: Converts RTL code into gate-level representations.
-2. Icarus Verilog & GTKWave
+2. Icarus Verilog & GTKWavee
 Icarus Verilog: For compilation and simulation.
 GTKWave: For viewing waveform files.
 
