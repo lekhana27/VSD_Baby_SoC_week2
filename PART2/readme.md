@@ -176,7 +176,7 @@ Post-synthesis simulation checks the **functionality and timing** of the synthes
 | Accuracy        | Abstract           | Realistic (gate delays)|
 ---
 ## 🧪 Simulation
-![post_synthesis ](./images/post_synth.png)
+![post_synthesis ](./images/post_synth.jpg)
 
 ## 📈 Signal Behavior Analysis
 
